@@ -1,0 +1,22 @@
+trigger:
+  branches:
+    include:
+      - main  # Modify this to match the branch you want to trigger the pipeline on
+pool:
+  vmImage: 'ubuntu-latest'  # Modify this based on the agent pool you want to use
+variables:
+  LT_USERNAME: 'ritamg'
+  LT_ACCESS_KEY: 'e4vXxk64hYOIkG7gwld5Fsb5LpmhI8wq6J0LQ2KC9LSgJHc1N5'
+steps:
+  - script: |
+      python -m pip install --upgrade pip
+      pip install selenium
+      pip install webdriver_manager
+    displayName: 'Install dependencies'
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'  # Modify this to match the Python version you want to use
+      addToPath: true
+  - script: |
+      python runrun.py
+    displayName: 'Run Selenium script'
